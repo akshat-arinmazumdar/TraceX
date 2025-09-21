@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRACE X - Modern Surveillance & Tracking</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #000000;
+            color: #FFFFFF;
+            overflow-x: hidden;
+        }
+
+        .title-font {
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .glow-text {
+            text-shadow: 0 0 10px rgba(20, 184, 166, 0.7);
+        }
+
+        .glow-box {
+            box-shadow: 0 0 15px rgba(20, 184, 166, 0.5);
+        }
+
+        .glow-box:hover {
+            box-shadow: 0 0 25px rgba(20, 184, 166, 0.8);
+        }
+
+        .neon-border {
+            border: 1px solid rgba(20, 184, 166, 0.3);
+            box-shadow: 0 0 10px rgba(20, 184, 166, 0.3), inset 0 0 10px rgba(20, 184, 166, 0.3);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(20, 184, 166, 0.3);
+        }
+
+        .workflow-step::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(to bottom, #14B8A6, #0EA5E9);
+        }
+
+        .workflow-step:last-child::before {
+            display: none;
+        }
+
+        .video-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+        }
+
+        .video-container::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #14B8A6, #0EA5E9, #10B981, #F59E0B);
+            z-index: -1;
+            border-radius: 14px;
+            animation: animate 4s linear infinite;
+            background-size: 400%;
+            opacity: 0.7;
+        }
+
+        @keyframes animate {
+            0% {
+                background-position: 0 0;
+            }
+
+            50% {
+                background-position: 400% 0;
+            }
+
+            100% {
+                background-position: 0 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Vanta.js Background -->
+    <div id="vanta-bg"></div>
+
+    <!-- Navigation -->
+    <nav class="relative z-10 py-6 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center">
+                <span class="title-font text-2xl font-bold text-white">
+                    <span class="text-teal-400">TRACE</span> <span class="text-cyan-400">X</span>
+                </span>
+            </div>
+            <div class="hidden md:flex space-x-8">
+                <a href="#features" class="text-gray-300 hover:text-white transition duration-300">Features</a>
+                <a href="#demo" class="text-gray-300 hover:text-white transition duration-300">Demo</a>
+                <a href="#workflow" class="text-gray-300 hover:text-white transition duration-300">How It Works</a>
+                <a href="#security" class="text-gray-300 hover:text-white transition duration-300">Security</a>
+            </div>
+            <button
+                class="hidden md:block bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white px-6 py-2 rounded-full font-medium transition duration-300 transform hover:scale-105">
+                Get Started
+            </button>
+            <button class="md:hidden text-gray-300">
+                <i data-feather="menu"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative z-10 py-20 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center" data-aos="fade-up" data-aos-duration="800">
+                <h1 class="title-font text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6">
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-cyan-400">TRACE
+                        X</span>
+                </h1>
+                <h2 class="text-xl sm:text-2xl md:text-3xl font-medium text-gray-300 mb-8 max-w-3xl mx-auto">
+                    Next-Gen Surveillance & Tracking System
+                </h2>
+                <p class="text-gray-400 mb-10 max-w-2xl mx-auto text-lg">
+                    Real-time plate recognition, AI-powered face detection, and instant security alerts powered by
+                    blockchain-grade encryption.
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <button
+                        class="bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white px-8 py-3 rounded-full font-medium text-lg transition duration-300 transform hover:scale-105 glow-box">
+                        Start Free Trial
+                    </button>
+                    <button
+                        class="border border-gray-700 hover:border-teal-400 text-white px-8 py-3 rounded-full font-medium text-lg transition duration-300 transform hover:scale-105">
+                        <span class="flex items-center justify-center">
+                            <i data-feather="play" class="mr-2"></i> Watch Demo
+                        </span>
+                    </button>
+                </div>
+            </div>
+            <div class="mt-20 grid grid-cols-1 md:grid-cols-3 gap-8" data-aos="fade-up" data-aos-duration="1000"
+                data-aos-delay="200">
+                <div class="bg-gray-900 bg-opacity-50 backdrop-blur-sm p-6 rounded-xl neon-border">
+                    <div class="text-teal-400 mb-4">
+                        <i data-feather="eye" class="w-10 h-10"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-2">Real-time Monitoring</h3>
+                    <p class="text-gray-400">24/7 surveillance with instant anomaly detection and alerts.</p>
+                </div>
+                <div class="bg-gray-900 bg-opacity-50 backdrop-blur-sm p-6 rounded-xl neon-border">
+                    <div class="text-cyan-400 mb-4">
+                        <i data-feather="cpu" class="w-10 h-10"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-2">AI-Powered Analysis</h3>
+                    <p class="text-gray-400">Advanced machine learning for accurate object and face recognition.</p>
+                </div>
+                <div class="bg-gray-900 bg-opacity-50 backdrop-blur-sm p-6 rounded-xl neon-border">
+                    <div class="text-green-400 mb-4">
+                        <i data-feather="shield" class="w-10 h-10"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-2">Advanced Data Protection</h3>
+                    <p class="text-gray-400">End-to-end encrypted storage with blockchain-backed verification for secure
+                        and reliable access.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="relative z-10 py-20 px-4 sm:px-6 lg:px-8 bg-black bg-opacity-70">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="title-font text-3xl sm:text-4xl font-bold text-white mb-4">
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-cyan-400">Advanced
+                        Features</span>
+                </h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">
+                    TRACE X combines cutting-edge technology with intuitive design for unparalleled surveillance
+                    capabilities.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-gray-900 bg-opacity-50 p-6 rounded-xl feature-card transition duration-500 hover:bg-opacity-70"
+                    data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-14 h-14 rounded-full bg-teal-900 bg-opacity-30 flex items-center justify-center mb-4">
+                        <i data-feather="credit-card" class="w-6 h-6 text-teal-400"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-2">License Plate Recognition</h3>
+                    <p class="text-gray-400">Detect and record vehicle license plates accurately in all conditions with high reliability.</p>
+                </div>
+                <div class="bg-gray-900 bg-opacity-50 p-6 rounded-xl feature-card transition duration-500 hover:bg-opacity-70"
+                    data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-14 h-14 rounded-full bg-cyan-900 bg-opacity-30 flex items-center justify-center mb-4">
+                        <i data-feather="user" class="w-6 h-6 text-cyan-400"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-2">Facial Recognition</h3>
+                    <p class="text-gray-400">Advanced biometric identification in low lighting conditions.</p>
+                </div>
+                <div class="bg-gray-900 bg-opacity-50 p-6 rounded-xl feature-card transition duration-500 hover:bg-opacity-70"
+                    data-aos="fade-up" data-aos-delay="300">
+                    <div
+                        class="w-14 h-14 rounded-full bg-green-900 bg-opacity-30 flex items-center justify-center mb-4">
+                        <i data-feather="alert-octagon" class="w-6 h-6 text-green-400"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-2">Real-time Alerts</h3>
+                    <p class="text-gray-400">Instant notifications for suspicious activities or persons of interest.</p>
+                </div>
+                <div class="bg-gray-900 bg-opacity-50 p-6 rounded-xl feature-card transition duration-500 hover:bg-opacity-70"
+                    data-aos="fade-up" data-aos-delay="400">
+                    <div
+                        class="w-14 h-14 rounded-full bg-yellow-900 bg-opacity-30 flex items-center justify-center mb-4">
+                        <i data-feather="database" class="w-6 h-6 text-yellow-400"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-2">Secure Database</h3>
+                    <p class="text-gray-400">Encrypted storage with blockchain verification to keep records safe and tamper-resistant.</p>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Live Demo Section -->
+    <section id="demo" class="relative z-10 py-20 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col lg:flex-row items-center gap-12">
+                <div class="lg:w-1/2" data-aos="fade-right">
+                    <h2 class="title-font text-3xl sm:text-4xl font-bold text-white mb-6">
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-cyan-400">Live
+                            Surveillance Demo</span>
+                    </h2>
+                    <p class="text-gray-400 mb-6">
+                        Experience TRACE X in action with our interactive demo. See how our system processes multiple
+                        video feeds simultaneously while maintaining perfect accuracy.
+                    </p>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 mt-1">
+                                <div class="w-6 h-6 rounded-full bg-teal-500 flex items-center justify-center">
+                                    <i data-feather="check" class="w-4 h-4 text-white"></i>
+                                </div>
+                            </div>
+                            <p class="ml-3 text-gray-300">Multi-camera processing at 60fps</p>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 mt-1">
+                                <div class="w-6 h-6 rounded-full bg-teal-500 flex items-center justify-center">
+                                    <i data-feather="check" class="w-4 h-4 text-white"></i>
+                                </div>
+                            </div>
+                            <p class="ml-3 text-gray-300">Low-light and IR camera support</p>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 mt-1">
+                                <div class="w-6 h-6 rounded-full bg-teal-500 flex items-center justify-center">
+                                    <i data-feather="check" class="w-4 h-4 text-white"></i>
+                                </div>
+                            </div>
+                            <p class="ml-3 text-gray-300">Instant alert system with location tracking</p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="lg:w-1/2" data-aos="fade-left">
+                    <div class="video-container">
+                        <div class="aspect-w-16 aspect-h-9 bg-gray-900 rounded-xl overflow-hidden">
+                            <div class="w-full h-full flex items-center justify-center">
+                                <div class="text-center">
+                                    <i data-feather="play-circle" class="w-16 h-16 text-teal-400 mx-auto mb-4"></i>
+                                    <p class="text-gray-400">Live CCTV Feed Simulation</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Workflow Section -->
+    <section id="workflow" class="relative z-10 py-20 px-4 sm:px-6 lg:px-8 bg-black bg-opacity-70">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="title-font text-3xl sm:text-4xl font-bold text-white mb-4">
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-cyan-400">How TRACE X
+                        Works</span>
+                </h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">
+                    Our streamlined process ensures maximum security with minimal setup.
+                </p>
+            </div>
+            <div class="relative">
+                <div
+                    class="hidden md:block absolute left-1/2 top-0 h-full w-0.5 bg-gradient-to-b from-teal-500 to-cyan-500 transform -translate-x-1/2">
+                </div>
+                <div class="space-y-12 md:space-y-0">
+                    <div class="relative workflow-step" data-aos="fade-up" data-aos-delay="100">
+                        <div class="md:w-1/2 md:ml-auto md:pl-12">
+                            <div class="bg-gray-900 bg-opacity-50 p-8 rounded-xl neon-border">
+                                <div class="flex items-center mb-4">
+                                    <div
+                                        class="flex-shrink-0 w-12 h-12 rounded-full bg-teal-900 bg-opacity-30 flex items-center justify-center">
+                                        <span class="text-teal-400 font-bold text-xl">1</span>
+                                    </div>
+                                    <h3 class="ml-4 text-xl font-semibold text-white">Camera Integration</h3>
+                                </div>
+                                <p class="text-gray-400">
+                                    Connect your existing CCTV cameras or install our high-resolution smart cameras with
+                                    night vision capabilities.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="relative workflow-step" data-aos="fade-up" data-aos-delay="200">
+                        <div class="md:w-1/2 md:pr-12">
+                            <div class="bg-gray-900 bg-opacity-50 p-8 rounded-xl neon-border">
+                                <div class="flex items-center mb-4">
+                                    <div
+                                        class="flex-shrink-0 w-12 h-12 rounded-full bg-cyan-900 bg-opacity-30 flex items-center justify-center">
+                                        <span class="text-cyan-400 font-bold text-xl">2</span>
+                                    </div>
+                                    <h3 class="ml-4 text-xl font-semibold text-white">AI Processing</h3>
+                                </div>
+                                <p class="text-gray-400">
+                                    Our neural networks analyze video feeds in real-time, identifying faces, vehicles,
+                                    and suspicious activities.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="relative workflow-step" data-aos="fade-up" data-aos-delay="300">
+                        <div class="md:w-1/2 md:ml-auto md:pl-12">
+                            <div class="bg-gray-900 bg-opacity-50 p-8 rounded-xl neon-border">
+                                <div class="flex items-center mb-4">
+                                    <div
+                                        class="flex-shrink-0 w-12 h-12 rounded-full bg-green-900 bg-opacity-30 flex items-center justify-center">
+                                        <span class="text-green-400 font-bold text-xl">3</span>
+                                    </div>
+                                    <h3 class="ml-4 text-xl font-semibold text-white">Secure Storage</h3>
+                                </div>
+                                <p class="text-gray-400">
+                                    All data is encrypted and stored with blockchain verification to ensure integrity
+                                    and prevent tampering.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="relative workflow-step" data-aos="fade-up" data-aos-delay="400">
+                        <div class="md:w-1/2 md:pr-12">
+                            <div class="bg-gray-900 bg-opacity-50 p-8 rounded-xl neon-border">
+                                <div class="flex items-center mb-4">
+                                    <div
+                                        class="flex-shrink-0 w-12 h-12 rounded-full bg-yellow-900 bg-opacity-30 flex items-center justify-center">
+                                        <span class="text-yellow-400 font-bold text-xl">4</span>
+                                    </div>
+                                    <h3 class="ml-4 text-xl font-semibold text-white">Instant Alerts</h3>
+                                </div>
+                                <p class="text-gray-400">
+                                    Receive real-time notifications via app, email, or SMS when the system detects
+                                    predefined security events.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Security Section -->
+    <section id="security" class="relative z-10 py-20 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col lg:flex-row items-center gap-12">
+                <div class="lg:w-1/2" data-aos="fade-right">
+                    <div class="bg-gray-900 bg-opacity-50 p-8 rounded-xl neon-border">
+                        <h2 class="title-font text-3xl sm:text-4xl font-bold text-white mb-6">
+                            <span
+                                class="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-cyan-400">Military-Grade
+                                Security</span>
+                        </h2>
+                        <p class="text-gray-400 mb-6">
+                            TRACE X was built with security as the foundation, not an afterthought. Our system exceeds
+                            all industry standards for data protection.
+                        </p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 mt-1">
+                                    <div class="w-6 h-6 rounded-full bg-teal-500 flex items-center justify-center">
+                                        <i data-feather="lock" class="w-4 h-4 text-white"></i>
+                                    </div>
+                                </div>
+                                <div class="ml-3">
+                                    <h3 class="text-lg font-semibold text-white">End-to-End Encryption</h3>
+                                    <p class="text-gray-400 text-sm">AES-256 encryption for all data in transit and at
+                                        rest</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 mt-1">
+                                    <div class="w-6 h-6 rounded-full bg-cyan-500 flex items-center justify-center">
+                                        <i data-feather="shield" class="w-4 h-4 text-white"></i>
+                                    </div>
+                                </div>
+                                <div class="ml-3">
+                                    <h3 class="text-lg font-semibold text-white">Blockchain Verification</h3>
+                                    <p class="text-gray-400 text-sm">Tamper-proof records with cryptographic hashing</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 mt-1">
+                                    <div class="w-6 h-6 rounded-full bg-green-500 flex items-center justify-center">
+                                        <i data-feather="globe" class="w-4 h-4 text-white"></i>
+                                    </div>
+                                </div>
+                                <div class="ml-3">
+                                    <h3 class="text-lg font-semibold text-white">Zero-Knowledge Architecture</h3>
+                                    <p class="text-gray-400 text-sm">We never store your raw video data</p>
+                                </div>
+                            </div>
+                           
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:w-1/2" data-aos="fade-left">
+                    <div class="bg-gradient-to-br from-gray-900 to-black p-1 rounded-xl neon-border">
+                        <div class="bg-gray-900 rounded-lg p-8">
+                            <h3 class="text-xl font-semibold text-white mb-6">Security Transparency Report (OUR GOAL)</h3>
+                            <div class="space-y-6">
+                                <div>
+                                    <div class="flex justify-between mb-2">
+                                        <span class="text-gray-300">Data Encryption</span>
+                                        <span class="text-teal-400 font-medium">100%</span>
+                                    </div>
+                                    <div class="w-full bg-gray-800 rounded-full h-2">
+                                        <div class="bg-teal-500 h-2 rounded-full" style="width: 100%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between mb-2">
+                                        <span class="text-gray-300">Uptime Reliability</span>
+                                        <span class="text-cyan-400 font-medium">99.99%</span>
+                                    </div>
+                                    <div class="w-full bg-gray-800 rounded-full h-2">
+                                        <div class="bg-cyan-500 h-2 rounded-full" style="width: 99.99%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between mb-2">
+                                        <span class="text-gray-300">Detection Accuracy</span>
+                                        <span class="text-green-400 font-medium">99.7%</span>
+                                    </div>
+                                    <div class="w-full bg-gray-800 rounded-full h-2">
+                                        <div class="bg-green-500 h-2 rounded-full" style="width: 99.7%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between mb-2">
+                                        <span class="text-gray-300">False Positives</span>
+                                        <span class="text-yellow-400 font-medium">0.2%</span>
+                                    </div>
+                                    <div class="w-full bg-gray-800 rounded-full h-2">
+                                        <div class="bg-yellow-500 h-2 rounded-full" style="width: 0.2%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-8 pt-6 border-t border-gray-800">
+                                <p class="text-gray-400 text-sm">
+                                    * Based on independent audits and real-world performance metrics from over 5,000
+                                    installations worldwide.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="relative z-10 py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-gray-900 to-black">
+        <div class="max-w-4xl mx-auto text-center" data-aos="fade-up">
+            <h2 class="title-font text-3xl sm:text-4xl font-bold text-white mb-6">
+                Ready to Transform Your Security?
+            </h2>
+            <p class="text-gray-400 mb-8 text-lg max-w-2xl mx-auto">
+                Join thousands of organizations who trust TRACE X for their surveillance needs.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <button
+                    class="bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white px-8 py-4 rounded-full font-medium text-lg transition duration-300 transform hover:scale-105 glow-box">
+                    Start Free 30-Day Trial
+                </button>
+                <button
+                    class="border border-gray-700 hover:border-teal-400 text-white px-8 py-4 rounded-full font-medium text-lg transition duration-300 transform hover:scale-105">
+                    <span class="flex items-center justify-center">
+                        <i data-feather="phone" class="mr-2"></i> Contact Sales
+                    </span>
+                </button>
+            </div>
+            <p class="text-gray-500 mt-6 text-sm">
+                No credit card required. 24/7 support included.
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="relative z-10 py-12 px-4 sm:px-6 lg:px-8 bg-black">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="title-font text-xl font-bold text-white mb-4">
+                        <span class="text-teal-400">TRACE</span> <span class="text-cyan-400">X</span>
+                    </h3>
+                    <p class="text-gray-400 mb-4">
+                        The future of intelligent surveillance and security systems.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-teal-400 transition duration-300">
+                            <i data-feather="twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-cyan-400 transition duration-300">
+                            <i data-feather="linkedin"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-green-400 transition duration-300">
+                            <i data-feather="github"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-yellow-400 transition duration-300">
+                            <i data-feather="youtube"></i>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-white font-semibold mb-4">Product</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Features</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Pricing</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Demo</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Integrations</a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-white font-semibold mb-4">Resources</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Documentation</a>
+                        </li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">API Reference</a>
+                        </li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Case Studies</a>
+                        </li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Blog</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-white font-semibold mb-4">Company</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">About Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Careers</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Privacy
+                                Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Terms of
+                                Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500 text-sm mb-4 md:mb-0">
+                    © 2023 TRACE X Technologies. All rights reserved.
+                </p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-500 hover:text-white transition duration-300 text-sm">Privacy</a>
+                    <a href="#" class="text-gray-500 hover:text-white transition duration-300 text-sm">Terms</a>
+                    <a href="#" class="text-gray-500 hover:text-white transition duration-300 text-sm">Cookies</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Vanta.js background
+        VANTA.NET({
+            el: "#vanta-bg",
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            scale: 1.00,
+            scaleMobile: 1.00,
+            color: 0x14b8a6,
+            backgroundColor: 0x0,
+            points: 10.00,
+            maxDistance: 20.00,
+            spacing: 15.00
+        });
+
+        // Initialize AOS animations
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true
+        });
+
+        // Initialize feather icons
+        feather.replace();
+    </script>
+</body>
+
+</html>
