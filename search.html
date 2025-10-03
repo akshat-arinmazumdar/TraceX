@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRACE X Investigator Portal</title>
+<script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.globe.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Montserrat:wght@300;400;600&display=swap');
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+        }
+        
+        .title-font {
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .curved-partition {
+            border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+            transform: rotate(180deg);
+        }
+        
+        .curved-partition-2 {
+            border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+        }
+        
+        .glow {
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.7);
+        }
+        
+        .capsule-button {
+            border-radius: 9999px;
+            transition: all 0.3s ease;
+        }
+        
+        .capsule-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+        }
+        
+        .upload-area {
+            border: 2px dashed rgba(0, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .upload-area:hover {
+            border-color: rgba(0, 255, 255, 0.7);
+            background-color: rgba(0, 255, 255, 0.05);
+        }
+        
+        .display-area {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .display-area::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: linear-gradient(45deg, 
+                rgba(0, 255, 255, 0.1) 0%, 
+                rgba(0, 255, 255, 0) 20%, 
+                rgba(0, 255, 255, 0) 80%, 
+                rgba(0, 255, 255, 0.1) 100%);
+            z-index: -1;
+            border-radius: 20px;
+        }
+        /* Custom scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+            width: 0.5rem;
+            background: transparent;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(6, 182, 212, 0.5);
+            border-radius: 0.25rem;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: rgba(6, 182, 212, 0.7);
+        }
+
+        #camera-scroll::-webkit-scrollbar {
+            width: 0.3rem;
+        }
+
+        #camera-scroll::-webkit-scrollbar-thumb {
+            background: rgba(6, 182, 212, 0.3);
+        }
+
+        #camera-scroll::-webkit-scrollbar-thumb:hover {
+            background: rgba(6, 182, 212, 0.5);
+        }
+</style>
+</head>
+<body class="bg-black text-gray-100 min-h-screen relative overflow-y-hidden">
+<div id="vanta-bg"></div>
+    
+    <!-- Main Container -->
+    <div class="container mx-auto px-4 py-8 relative z-10">
+        <!-- Header -->
+        <header class="flex justify-between items-center mb-12">
+            <div class="flex items-center">
+                <h1 class="title-font text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">
+                    TRACE X
+                </h1>
+</div>
+            <div class="flex items-center space-x-4">
+                <button class="bg-gray-900 bg-opacity-70 rounded-full p-2 hover:bg-cyan-600 transition-colors">
+                    <i data-feather="camera" class="text-cyan-400"></i>
+                </button>
+                <div class="bg-gray-900 bg-opacity-70 rounded-full p-2">
+                    <i data-feather="bell" class="text-cyan-400"></i>
+                </div>
+                <div class="bg-gray-900 bg-opacity-70 rounded-full p-2">
+                    <i data-feather="settings" class="text-cyan-400"></i>
+                </div>
+            </div>
+</header>
+        
+        <!-- Main Content -->
+        <main class="flex flex-col lg:flex-row gap-8">
+            <!-- Left Section -->
+            <div class="lg:w-2/3">
+                <!-- Central Display Area -->
+                <div class="display-area bg-gray-900 bg-opacity-50 backdrop-blur-sm rounded-2xl p-6 mb-8 glow">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="title-font text-xl md:text-2xl font-bold text-cyan-400">INVESTIGATION DASHBOARD</h2>
+                        <div class="flex space-x-2">
+                            <button class="bg-gray-800 hover:bg-gray-700 px-3 py-1 rounded-lg text-sm transition-colors">
+                                <i data-feather="refresh-cw" class="w-4 h-4 inline mr-1"></i> Refresh
+                            </button>
+                            <button class="bg-cyan-600 hover:bg-cyan-500 px-3 py-1 rounded-lg text-sm transition-colors">
+                                <i data-feather="plus" class="w-4 h-4 inline mr-1"></i> New
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-black bg-opacity-60 rounded-xl h-64 md:h-96 flex items-center justify-center">
+                        <div class="text-center">
+                            <i data-feather="eye" class="w-12 h-12 mx-auto text-cyan-400 mb-4"></i>
+                            <p class="text-gray-400">Visualization area for investigation data</p>
+                            <p class="text-xs text-gray-500 mt-2">Drag and drop files or select from workspace</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="bg-gray-800 bg-opacity-50 rounded-lg p-3">
+                            <p class="text-xs text-gray-400">Active Cases</p>
+                            <p class="text-xl font-bold text-cyan-400">24</p>
+                        </div>
+                        <div class="bg-gray-800 bg-opacity-50 rounded-lg p-3">
+                            <p class="text-xs text-gray-400">Completed</p>
+                            <p class="text-xl font-bold text-green-400">142</p>
+                        </div>
+                        <div class="bg-gray-800 bg-opacity-50 rounded-lg p-3">
+                            <p class="text-xs text-gray-400">Pending</p>
+                            <p class="text-xl font-bold text-yellow-400">8</p>
+                        </div>
+                        <div class="bg-gray-800 bg-opacity-50 rounded-lg p-3">
+                            <p class="text-xs text-gray-400">Total Hours</p>
+                            <p class="text-xl font-bold text-purple-400">1,284</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Curved Partitions Section -->
+                <div class="relative h-40 mb-8">
+                    <div class="curved-partition absolute bottom-0 left-0 w-1/2 h-full bg-gray-900 bg-opacity-70"></div>
+                    <div class="curved-partition-2 absolute bottom-0 right-0 w-1/2 h-full bg-gray-800 bg-opacity-70"></div>
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <div class="text-center z-10">
+                            <h3 class="title-font text-lg text-cyan-400 mb-2">Dual Analysis Mode</h3>
+                            <p class="text-xs text-gray-400 max-w-md mx-auto">Compare and contrast evidence with our partitioned investigation tools</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Bottom Left Capsule Button -->
+                <div class="fixed bottom-8 left-8 z-20">
+                    <div class="flex items-center space-x-2 capsule-button bg-gray-900 bg-opacity-70 px-4 py-3 glow">
+                        <button class="bg-cyan-600 hover:bg-cyan-500 text-white px-4 py-1 rounded-full text-sm transition-colors">
+                            Search
+                        </button>
+                        <button class="bg-gray-800 hover:bg-gray-700 text-gray-300 px-4 py-1 rounded-full text-sm transition-colors flex items-center">
+                            <i data-feather="search" class="w-4 h-4 mr-1"></i> Live
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- Right Section (Workspace) -->
+            <div class="lg:w-1/3 sticky top-4 h-[calc(100vh-2rem)] overflow-y-hidden custom-scrollbar">
+                <div class="bg-gray-900 bg-opacity-50 backdrop-blur-sm rounded-2xl p-6 glow">
+<h2 class="title-font text-xl font-bold text-cyan-400 mb-6 flex items-center">
+                        <i data-feather="briefcase" class="mr-2"></i> WORKSPACE
+                    </h2>
+                    <div class="upload-area rounded-xl p-8 mb-6 text-center cursor-pointer">
+                        <i data-feather="upload-cloud" class="w-10 h-10 mx-auto text-cyan-400 mb-3"></i>
+                        <p class="text-gray-400 mb-1">Connect to CCTV Network</p>
+                        <p class="text-xs text-gray-500">or manually add cameras</p>
+                    </div>
+                    <div class="mb-6 pr-2 h-64 overflow-y-auto" id="camera-scroll">
+                        <h3 class="text-sm font-semibold text-gray-400 mb-3 sticky top-0 bg-gray-900 bg-opacity-80 py-2 z-10">LIVE CAMERAS</h3>
+                        <div class="space-y-3">
+                            <div class="bg-gray-800 bg-opacity-50 rounded-lg p-3">
+                                <div class="aspect-video bg-black rounded-lg mb-2 flex items-center justify-center">
+                                    <i data-feather="video" class="w-8 h-8 text-cyan-400"></i>
+                                </div>
+                                <p class="text-sm">Entrance Camera</p>
+                                <p class="text-xs text-gray-500">1080p • Live</p>
+                            </div>
+                            <div class="bg-gray-800 bg-opacity-50 rounded-lg p-3">
+                                <div class="aspect-video bg-black rounded-lg mb-2 flex items-center justify-center">
+                                    <i data-feather="video" class="w-8 h-8 text-cyan-400"></i>
+                                </div>
+                                <p class="text-sm">Parking Lot Camera</p>
+                                <p class="text-xs text-gray-500">720p • Live</p>
+                            </div>
+                            <div class="bg-gray-800 bg-opacity-50 rounded-lg p-3">
+                                <div class="aspect-video bg-black rounded-lg mb-2 flex items-center justify-center">
+                                    <i data-feather="video" class="w-8 h-8 text-cyan-400"></i>
+                                </div>
+                                <p class="text-sm">Hallway Camera</p>
+                                <p class="text-xs text-gray-500">1080p • Live</p>
+                            </div>
+                            <div class="bg-gray-800 bg-opacity-50 rounded-lg p-3">
+                                <div class="aspect-video bg-black rounded-lg mb-2 flex items-center justify-center">
+                                    <i data-feather="video" class="w-8 h-8 text-cyan-400"></i>
+                                </div>
+                                <p class="text-sm">Lobby Camera</p>
+                                <p class="text-xs text-gray-500">4K • Live</p>
+                            </div>
+                            <div class="bg-gray-800 bg-opacity-50 rounded-lg p-3">
+                                <div class="aspect-video bg-black rounded-lg mb-2 flex items-center justify-center">
+                                    <i data-feather="video" class="w-8 h-8 text-cyan-400"></i>
+                                </div>
+                                <p class="text-sm">Security Room</p>
+                                <p class="text-xs text-gray-500">1080p • Live</p>
+                            </div>
+                        </div>
+                    </div>
+<div class="pr-2 pb-4">
+<h3 class="text-sm font-semibold text-gray-400 mb-3">QUICK ACTIONS</h3>
+                        <div class="grid grid-cols-2 gap-3">
+                            <button class="bg-gray-800 hover:bg-gray-700 rounded-lg p-3 text-sm flex items-center justify-center space-x-2 transition-colors">
+                                <i data-feather="camera" class="text-cyan-400"></i>
+                                <span>Capture</span>
+                            </button>
+                            <button class="bg-gray-800 hover:bg-gray-700 rounded-lg p-3 text-sm flex items-center justify-center space-x-2 transition-colors">
+                                <i data-feather="filter" class="text-purple-400"></i>
+                                <span>Analyze</span>
+                            </button>
+                            <button class="bg-gray-800 hover:bg-gray-700 rounded-lg p-3 text-sm flex items-center justify-center space-x-2 transition-colors">
+                                <i data-feather="share-2" class="text-green-400"></i>
+                                <span>Share</span>
+                            </button>
+                            <button class="bg-gray-800 hover:bg-gray-700 rounded-lg p-3 text-sm flex items-center justify-center space-x-2 transition-colors">
+                                <i data-feather="save" class="text-yellow-400"></i>
+                                <span>Export</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script>
+        // Initialize Vanta.js globe background
+        VANTA.GLOBE({
+            el: "#vanta-bg",
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            scale: 1.00,
+            scaleMobile: 1.00,
+            color: 0x00ffff,
+            backgroundColor: 0x0,
+            size: 0.8,
+            points: 8.00
+        });
+        
+        // Feather icons replacement
+        document.addEventListener('DOMContentLoaded', function() {
+            feather.replace();
+        // Enable scroll for entire page but hide scrollbar
+        document.body.style.overflowY = 'scroll';
+        document.body.style.scrollbarWidth = 'none'; /* For Firefox */
+        document.body.style.msOverflowStyle = 'none'; /* For IE and Edge */
+// Capture button functionality
+        document.querySelector('button[data-feather="camera"]').addEventListener('click', () => {
+            alert('Capture functionality activated!');
+            // Here you can add actual capture logic
+        });
+
+        // Simple animation for the central display area
+anime({
+                targets: '.display-area',
+                scale: [0.98, 1],
+                opacity: [0.9, 1],
+                duration: 1500,
+                easing: 'easeOutElastic'
+            });
+            
+            // Hover effect for buttons
+            const buttons = document.querySelectorAll('button');
+            buttons.forEach(button => {
+                button.addEventListener('mouseenter', () => {
+                    anime({
+                        targets: button,
+                        scale: 1.05,
+                        duration: 200
+                    });
+                });
+                button.addEventListener('mouseleave', () => {
+                    anime({
+                        targets: button,
+                        scale: 1,
+                        duration: 200
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

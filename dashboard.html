@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRACE X | Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            overflow-y: hidden;
+        }
+.glow-effect {
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+        }
+        
+        .glow-text {
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
+        }
+        
+        .sidebar-item:hover {
+            background: rgba(0, 255, 255, 0.1);
+            border-left: 3px solid #00ffff;
+        }
+        .drag-drop-area {
+            border: 2px dashed rgba(0, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: #00ffff;
+        }
+        
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: rgba(0, 255, 255, 0.3);
+        }
+        
+        .toggle-label {
+            transition: all 0.3s ease;
+        }
+.drag-drop-area:hover {
+            border: 2px dashed rgba(0, 255, 255, 0.7);
+            background: rgba(0, 255, 255, 0.05);
+        }
+        
+        .chat-bubble {
+            background: rgba(20, 30, 40, 0.8);
+            border-radius: 18px;
+            border-bottom-left-radius: 0;
+        }
+        
+        .user-bubble {
+            background: rgba(0, 180, 180, 0.2);
+            border-radius: 18px;
+            border-bottom-right-radius: 0;
+        }
+        
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(0, 255, 255, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(0, 255, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 255, 255, 0); }
+        }
+        .video-feed {
+            background: #1a202c; /* Fallback color */
+        }
+        
+        .animate-wave {
+            display: inline-block;
+        }
+</style>
+</head>
+<body class="bg-black text-gray-200 min-h-screen">
+<!-- Vanta.js Background -->
+    <div id="vanta-bg" class="fixed inset-0 -z-10">
+                </div>
+                <div class="absolute -bottom-2 left-0 right-0 h-8 bg-gradient-to-t from-black to-transparent opacity-80 rounded-b-lg"></div>
+            </div>
+<!-- Logo -->
+<div class="fixed top-4 left-4 z-50">
+    <div class="flex items-center space-x-2">
+        
+         <span class="title-font text-2xl font-bold text-white">
+                    <span class="text-teal-400">TRACE</span> <span class="text-cyan-400">X</span>
+                </span>
+    </div>
+</div>
+<!-- Main Content -->
+    <div class="flex-1 flex flex-col w-full mt-24">
+<!-- Main Work Area -->
+        <main class="flex-1 p-6 w-full">
+            <div class="w-full" data-aos="fade-up">
+<div class="relative">
+    <h3 class="text-lg font-medium mb-4">Live Video Feed</h3>
+        <div class="w-[90rem] h-[29rem] bg-gray-900 rounded-lg mb-5 flex items-center justify-center overflow-hidden relative mx-auto">
+        <div class="absolute inset-0 bg-gradient-to-br from-transparent via-cyan-500/10 to-transparent opacity-30 animate-pulse"></div>
+        <!-- Corrected video feed URL -->
+        <img src="http://127.0.0.1:5000/video_feed" 
+             class="w-full h-full object-contain rounded-lg" 
+             onerror="this.style.display='none'; document.getElementById('fallback-message').style.display='flex';" 
+             alt="Live Video Feed" />
+<div id="fallback-message" class="hidden flex-col items-center justify-center text-gray-500 relative z-10">
+<i data-feather="wifi-off" class="w-12 h-12 mb-2"></i>
+                        <p>Video feed unavailable</p>
+                        <p class="text-sm mt-2">Make sure the Flask server is running</p>
+                    </div>
+                </div>
+                <!-- Toggle Switch -->
+                <div class="mt-6 flex flex-col items-center">
+                    <h4 class="text-sm font-medium text-gray-300 mb-3">Feed Mode</h4>
+                    <div class="relative inline-block w-16 mr-2 align-middle select-none transition duration-200 ease-in">
+                        <input type="checkbox" name="toggle" id="toggle" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"/>
+                        <label for="toggle" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-700 cursor-pointer"></label>
+                    </div>
+                    <p id="mode-text" class="text-center text-sm text-gray-300 mt-2 transition-all duration-300">Live Camera Feed</p>
+</div>
+</div>
+            <!-- Action Buttons -->
+            <div class="flex justify-end space-x-4 w-full mt-4" data-aos="fade-up">
+<button class="w-12 h-12 rounded-full bg-gradient-to-br from-cyan-600 to-blue-600 flex items-center justify-center glow-effect pulse-animation">
+                    <i data-feather="touch" class="w-5 h-5 text-white"></i>
+                </button>
+                <button class="px-6 py-3 bg-gradient-to-r from-teal-600 to-cyan-600 hover:from-teal-500 hover:to-cyan-500 text-white rounded-lg flex items-center space-x-2 transition-all">
+                    <i data-feather="image" class="w-5 h-5"></i>
+                    <span>Place Evidence</span>
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Add billowing effect to video feed
+        const videoFeed = document.querySelector('.video-feed img');
+        if (videoFeed) {
+            // Remove scaling animation for clearer view
+}
+
+        // Initialize Vanta.js background
+VANTA.NET({
+            el: "#vanta-bg",
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            scale: 1.00,
+            scaleMobile: 1.00,
+            color: 0x00ffff,
+            backgroundColor: 0x0,
+            points: 10.00,
+            maxDistance: 22.00,
+            spacing: 17.00
+        });
+        
+        // Initialize AOS and Feather Icons
+        document.addEventListener('DOMContentLoaded', function() {
+            AOS.init({
+                duration: 800,
+                easing: 'ease-in-out',
+                once: true
+            });
+            feather.replace();
+        // Toggle switch functionality
+        const toggle = document.getElementById('toggle');
+        const modeText = document.getElementById('mode-text');
+        toggle.addEventListener('change', function() {
+            // Wave animation
+            modeText.classList.add('opacity-0', 'translate-y-2');
+            
+            setTimeout(() => {
+                if(this.checked) {
+                    modeText.textContent = 'Investigation Mode';
+                } else {
+                    modeText.textContent = 'Live Camera Feed';
+                }
+                
+                modeText.classList.remove('opacity-0', 'translate-y-2');
+                modeText.classList.add('animate-wave');
+                
+                setTimeout(() => {
+                    modeText.classList.remove('animate-wave');
+                }, 1000);
+            }, 300);
+        });
+
+        // Add wave animation keyframes
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes wave {
+                0%, 100% { transform: translateY(0); }
+                25% { transform: translateY(-5px); }
+                50% { transform: translateY(0); }
+                75% { transform: translateY(-3px); }
+            }
+            .animate-wave {
+                animation: wave 0.8s ease-in-out;
+            }
+        `;
+        document.head.appendChild(style);
+// Drag and drop functionality
+        const dropArea = document.querySelector('.drag-drop-area');
+});
+    </script>
+</body>
+</html>
